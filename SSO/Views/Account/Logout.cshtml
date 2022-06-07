@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Logout Page";
+}
+
+<p>退出登录中...</p>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        logOut()
+        function logOut() {
+            var sessionCode = getCookie("SessionCode")
+            //清除会话
+            clearCookie("SessionCode")
+            //获取参数集合
+            const urlParams = GetParam();
+            //跳转到登录
+            const clientId = urlParams['clientId'];
+            const redirectUrl = urlParams['redirectUrl']
+
+            var params = { sessionCode }
+            //退出登录
+            $.ajax({
+                url: '/Account/LogOutApp',
+                type: "POST",
+                data: JSON.stringify(params),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data) {
+                    console.log('token', data)
+                    if (data.code === 0) //成功
+                    {
+                        //跳转到登录页面
+                        window.location.href = '/Account/Login' + '?clientId=' + clientId + '&redirectUrl=' + redirectUrl
+                    }
+                }
+            })
+        }
+    </script>
+}
