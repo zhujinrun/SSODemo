@@ -32,9 +32,7 @@ namespace SSO.Services
         /// <exception cref="NotImplementedException"></exception>
         public ServerResponse<string> GetCode(string clientId, string userName, string password)
         {
-            ServerResponse<string> result = new ServerResponse<string>();
-
-            string code = string.Empty;
+            var result = new ServerResponse<string>();
             AppHSSetting appHSSetting = _options.Value.AppHSSettings.Where(s => s.ClientId == clientId).FirstOrDefault();
             if (appHSSetting == null)
             {
@@ -59,7 +57,7 @@ namespace SSO.Services
             };
 
             //生成授权码
-            code = Guid.NewGuid().ToString().Replace("-", "").ToUpper();
+            var code = Guid.NewGuid().ToString().Replace("-", "").ToUpper();
             string key = $"AuthCode:{code}";
             string appCachekey = $"AuthCodeClientId:{code}";
             //缓存授权码
@@ -139,19 +137,18 @@ namespace SSO.Services
             var currentUserModel = _cache.StringGet<CurrentUserModel>($"RefreshToken:{refreshToken}");
             if (currentUserModel == null)
             {
-                return String.Empty;
+                return string.Empty;
             }
             //刷新token过期时间
             DateTime refreshTokenExpiry = _cache.StringGet<DateTime>($"RefreshTokenExpiry:{refreshToken}");
             //token默认时间为600s
-            double tokenExpiry = 600;
+            double tokenExpiry = _options.Value.TokenExpireSeconds;
             //如果刷新token的过期时间不到600s了，token过期时间为刷新token的过期时间
-            if (refreshTokenExpiry > DateTime.Now && refreshTokenExpiry < DateTime.Now.AddSeconds(600))
+            if (refreshTokenExpiry > DateTime.Now && refreshTokenExpiry < DateTime.Now.AddSeconds(_options.Value.TokenExpireSeconds))
             {
                 tokenExpiry = (refreshTokenExpiry - DateTime.Now).TotalSeconds;
             }
-
-            //从新生成Token
+            //重新生成Token
             string token = IssueToken(currentUserModel, clientId, tokenExpiry);
             return token;
         }
@@ -182,7 +179,7 @@ namespace SSO.Services
             string clientId = _cache.StringGet<string>(clientIdCachekey);
             //刷新token过期时间
             DateTime sessionExpiryTime = _cache.StringGet<DateTime>(AuthCodeSessionTimeKey);
-            DateTime tokenExpiryTime = DateTime.Now.AddMinutes(10);//token过期时间10分钟
+            DateTime tokenExpiryTime = DateTime.Now.AddSeconds(_options.Value.TokenExpireSeconds);//token过期时间10分钟
             //如果刷新token有过期期比token默认时间短，把token过期时间设成和刷新token一样
             if (sessionExpiryTime > DateTime.Now && sessionExpiryTime < tokenExpiryTime)
             {
@@ -198,7 +195,7 @@ namespace SSO.Services
             }
             else
             {
-                refreshTokenExpiry = TimeSpan.FromSeconds(60 * 60 * 24);//默认24小时
+                refreshTokenExpiry = TimeSpan.FromSeconds(_options.Value.RefreshTokenExpireSeconds);//默认24小时
             }
             //获取刷新token
             string refreshToken = this.IssueToken(currentUserModel, clientId, refreshTokenExpiry.TotalSeconds);
@@ -206,7 +203,7 @@ namespace SSO.Services
             _cache.StringSet($"RefreshToken:{refreshToken}", currentUserModel, refreshTokenExpiry);
             //缓存刷新token过期时间
             _cache.StringSet($"RefreshTokenExpiry:{refreshToken}", DateTime.Now.AddSeconds(refreshTokenExpiry.TotalSeconds), refreshTokenExpiry);
-            result.SetSuccess(new TokenResponse() { Token = token, RefreshToken = refreshToken, Expires = 60 * 10 });
+            result.SetSuccess(new TokenResponse() { Token = token, RefreshToken = refreshToken, Expires = _options.Value.TokenExpireSeconds });
             Console.WriteLine($"client_id:{clientId}获取token,有效期:{sessionExpiryTime.ToString("yyyy-MM-dd HH:mm:ss")},token:{token}");
             return result;
         }
@@ -220,7 +217,7 @@ namespace SSO.Services
         /// <param name="clientId"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        private string IssueToken(CurrentUserModel userModel, string clientId, double seconds = 600)
+        private string IssueToken(CurrentUserModel userModel, string clientId, double seconds)
         {
             var claims = new[]
             {

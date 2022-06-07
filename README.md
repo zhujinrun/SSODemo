@@ -1,1 +1,71 @@
 # SSODemo
+
+### 1. [在线RSA Key格式转换](https://www.ssleye.com/ssltool/pem_xml.html)
+
+### 2. 非对称加密 RSA Key
+
+#### PEM
+
+```ini
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvnZdjDT+SFgdZJiV8XcC
+dvWck3OenzcQme+mfpoJtDIoUgJYmpoTLRA+wH8t21MFTz6e69oC3SKq7dx/xvsa
+5xRBud0oNwRRSKnUF345R84qTC2mvrznXNuiIuOJV2soG/lVxwCDgVPh0yJnWWkd
+3wD8D3keIpyxC5eHE5RnwVnB0paxk5Mnu/E/SmIoxdt1xR3sAg8nspbfMa3Wswhk
+/jKZx2GPjYGunK7epysr2gkVekhX7S4o7dfuFK3x/+wG+mdsNFVsp8eQ+G66rHPP
+i50eeKTUCH1RneSCyxVV8EZflVYHWX7azCW4AOsqEQGqMWvwshi09BVo2O8hHrnL
+cwIDAQAB
+-----END PUBLIC KEY-----
+```
+
+```ini
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+dl2MNP5IWB1k
+mJXxdwJ29ZyTc56fNxCZ76Z+mgm0MihSAliamhMtED7Afy3bUwVPPp7r2gLdIqrt
+3H/G+xrnFEG53Sg3BFFIqdQXfjlHzipMLaa+vOdc26Ii44lXaygb+VXHAIOBU+HT
+ImdZaR3fAPwPeR4inLELl4cTlGfBWcHSlrGTkye78T9KYijF23XFHewCDyeylt8x
+rdazCGT+MpnHYY+Nga6crt6nKyvaCRV6SFftLijt1+4UrfH/7Ab6Z2w0VWynx5D4
+brqsc8+LnR54pNQIfVGd5ILLFVXwRl+VVgdZftrMJbgA6yoRAaoxa/CyGLT0FWjY
+7yEeuctzAgMBAAECggEAczlonsnwjBPCtHkbPVmiRBWTBCGOdQP7JyW0tCK8fCdb
+/UEuGVndAAYz8IEAXQ98xtQ7kLPzx5SRlBUxuE9xlxrKKIeDLMWP50XW6d+TB73S
+GQQFPJ9L2QGGtVSyYhCR01qkaiAFbtgwZmsJ2y2cxKzz0OiVMptZAIpLTa0al/2I
+s+jtFs8rAgCfduUfLtwIX+fNG9Bw2oPgLbU0OPVObBSCjAMqv3/7mGeXG6RSzW24
+lInMdEU4gzPBpEGVy+1PkwfEhlGBXn45TpOc9V76CE8+8x+5KO1Gjde+Pb7I+ash
+gLfja8VfnfgUBebHyykINV0bU2SesG6huoGtjW6IAQKBgQDzYL3KNWXO7u/tcczN
+FszTwDju8d9x/OAK8omaS/e+Deot827FVEkiYYfQ3jK6qNcpSgpx2HHKDuZqjVGW
+RBWjhCWuRIKguYUltOL0UvF8rBTsWHTAF5hF9dUgFZBIsZk04O9FTkvye5sSDXKE
+uJO0XRBPiSU7mmHuazzAIouL4QKBgQDIVxRnRCrbEOhPNvp1YdAVi4FQg37DRqBX
+itUWtOYKhQdy2X19jQniO8B4lfcb82mrtX7FPb0dUYmNtGH5tZ5sjQpsO02vUGfe
+rkjBihcyLjGTbXi6a2C1vBzxwbq6pXFHWR5qNRXoSwQ675Q+ilKPxT2P53QUl2TY
+lmDrUl2h0wKBgAwVg5bkq9doebU6b0bHmQfyhWEn1UZdneotPLPSjcx7+GKrsZZO
+pwrz+MBgJ/iopXZBXN9mNdAoiTxFJAXn/4MM7qoGcM32KCxFHPewnpjoGmnZwoI/
+KapfmGNtbqqNVuQPPxIb3x19EagFzufUGlFcRZENaDHban1iCbQogvFBAoGBAJ8t
+CQoPkFlkMqAV16QCJlmn8QPupn4zFFzZ8vrKmmhLUCLBiUKDGBJHVWK6DI+JtDD4
+0JOYvTSZP0h2xM2prwkieuCJseyUXyL/qNEVjd6R81Pmy+CaRkm+/+RZ/6oin0GI
+HnFWYmShjefhyRBzyKtwlLxMst9Vdovb13/BfqF/AoGADfPeU1I/SarCaymMcb6P
+xfV/3kKJW1673hvzDGiVuDYjUWa8j9h9bowi6lHjsUbjw4vT/lfU3+5TaXeTdmLF
+FhQqU7Gw31IkWUw8nQg9V5rdoJui8Z2MKpLeo/DeGrkk8QVn2/GNUiR+DLGHOK2M
+yPUFayuJ1n+agcS5nInFQiU=
+-----END PRIVATE KEY-----
+```
+
+#### XML
+
+* public key
+
+```xml-dtd
+<RSAKeyValue><Modulus>vnZdjDT+SFgdZJiV8XcCdvWck3OenzcQme+mfpoJtDIoUgJYmpoTLRA+wH8t21MFTz6e69oC3SKq7dx/xvsa5xRBud0oNwRRSKnUF345R84qTC2mvrznXNuiIuOJV2soG/lVxwCDgVPh0yJnWWkd3wD8D3keIpyxC5eHE5RnwVnB0paxk5Mnu/E/SmIoxdt1xR3sAg8nspbfMa3Wswhk/jKZx2GPjYGunK7epysr2gkVekhX7S4o7dfuFK3x/+wG+mdsNFVsp8eQ+G66rHPPi50eeKTUCH1RneSCyxVV8EZflVYHWX7azCW4AOsqEQGqMWvwshi09BVo2O8hHrnLcw==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>
+```
+
+* private  key
+```xml-dtd
+<RSAKeyValue><Modulus>vnZdjDT+SFgdZJiV8XcCdvWck3OenzcQme+mfpoJtDIoUgJYmpoTLRA+wH8t21MFTz6e69oC3SKq7dx/xvsa5xRBud0oNwRRSKnUF345R84qTC2mvrznXNuiIuOJV2soG/lVxwCDgVPh0yJnWWkd3wD8D3keIpyxC5eHE5RnwVnB0paxk5Mnu/E/SmIoxdt1xR3sAg8nspbfMa3Wswhk/jKZx2GPjYGunK7epysr2gkVekhX7S4o7dfuFK3x/+wG+mdsNFVsp8eQ+G66rHPPi50eeKTUCH1RneSCyxVV8EZflVYHWX7azCW4AOsqEQGqMWvwshi09BVo2O8hHrnLcw==</Modulus><Exponent>AQAB</Exponent><P>82C9yjVlzu7v7XHMzRbM08A47vHfcfzgCvKJmkv3vg3qLfNuxVRJImGH0N4yuqjXKUoKcdhxyg7mao1RlkQVo4QlrkSCoLmFJbTi9FLxfKwU7Fh0wBeYRfXVIBWQSLGZNODvRU5L8nubEg1yhLiTtF0QT4klO5ph7ms8wCKLi+E=</P><Q>yFcUZ0Qq2xDoTzb6dWHQFYuBUIN+w0agV4rVFrTmCoUHctl9fY0J4jvAeJX3G/Npq7V+xT29HVGJjbRh+bWebI0KbDtNr1Bn3q5IwYoXMi4xk214umtgtbwc8cG6uqVxR1keajUV6EsEOu+UPopSj8U9j+d0FJdk2JZg61JdodM=</Q><DP>DBWDluSr12h5tTpvRseZB/KFYSfVRl2d6i08s9KNzHv4Yquxlk6nCvP4wGAn+KildkFc32Y10CiJPEUkBef/gwzuqgZwzfYoLEUc97CemOgaadnCgj8pql+YY21uqo1W5A8/EhvfHX0RqAXO59QaUVxFkQ1oMdtqfWIJtCiC8UE=</DP><DQ>ny0JCg+QWWQyoBXXpAImWafxA+6mfjMUXNny+sqaaEtQIsGJQoMYEkdVYroMj4m0MPjQk5i9NJk/SHbEzamvCSJ64Imx7JRfIv+o0RWN3pHzU+bL4JpGSb7/5Fn/qiKfQYgecVZiZKGN5+HJEHPIq3CUvEyy31V2i9vXf8F+oX8=</DQ><InverseQ>DfPeU1I/SarCaymMcb6PxfV/3kKJW1673hvzDGiVuDYjUWa8j9h9bowi6lHjsUbjw4vT/lfU3+5TaXeTdmLFFhQqU7Gw31IkWUw8nQg9V5rdoJui8Z2MKpLeo/DeGrkk8QVn2/GNUiR+DLGHOK2MyPUFayuJ1n+agcS5nInFQiU=</InverseQ><D>czlonsnwjBPCtHkbPVmiRBWTBCGOdQP7JyW0tCK8fCdb/UEuGVndAAYz8IEAXQ98xtQ7kLPzx5SRlBUxuE9xlxrKKIeDLMWP50XW6d+TB73SGQQFPJ9L2QGGtVSyYhCR01qkaiAFbtgwZmsJ2y2cxKzz0OiVMptZAIpLTa0al/2Is+jtFs8rAgCfduUfLtwIX+fNG9Bw2oPgLbU0OPVObBSCjAMqv3/7mGeXG6RSzW24lInMdEU4gzPBpEGVy+1PkwfEhlGBXn45TpOc9V76CE8+8x+5KO1Gjde+Pb7I+ashgLfja8VfnfgUBebHyykINV0bU2SesG6huoGtjW6IAQ==</D></RSAKeyValue>
+```
+
+
+
+##### 鸣谢
+
+【包子wxl】https://www.cnblogs.com/wei325/p/16316004.html
+
+【weixiaolong325】https://github.com/weixiaolong325/SSO.Demo.SSO

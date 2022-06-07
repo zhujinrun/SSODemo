@@ -5,6 +5,10 @@
     /// </summary>
     public class AppSettingsOptions
     {
+        public double TokenExpireSeconds { get; set; }
+
+        public double RefreshTokenExpireSeconds { get; set; }
+
         public List<AppHSSetting> AppHSSettings { get; set; }
 
         public List<AppRSSetting> AppRSSettings { get; set; }
@@ -42,10 +46,6 @@
         /// 应用Key
         /// </summary>
         public string ClientId { get; set; }
-        /// <summary>
-        /// 公钥-加密
-        /// </summary>
-        public string PublicKey { get; set; }
         /// <summary>
         /// 私钥-解密
         /// </summary>

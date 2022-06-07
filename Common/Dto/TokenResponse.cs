@@ -22,7 +22,7 @@ namespace Common.Dto
         /// <summary>
         /// 过期时间,多少s后
         /// </summary>
-        public int Expires { get; set; }
+        public double Expires { get; set; }
         /// <summary>
         /// 资源域
         /// </summary>

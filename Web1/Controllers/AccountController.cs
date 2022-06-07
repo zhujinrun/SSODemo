@@ -4,7 +4,6 @@ using Common.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using System.Text.Json;
-using Web1.Models;
 
 namespace Web1.Controllers
 {
@@ -35,9 +34,9 @@ namespace Web1.Controllers
         /// <returns></returns>
         [MyAuthorize]
         [HttpPost]
-        public ServerResponse<UserModel> GetUserInfo()
+        public ServerResponse GetUserInfo()
         {
-            return new ServerResponse<UserModel>();
+            return new ServerResponse().SetSuccess();
         }
 
         /// <summary>
@@ -59,9 +58,13 @@ namespace Web1.Controllers
             if (result.Code == 0) //成功
             {
                 //成功,缓存token到局部会话
-                _cacheService.StringSet<string>($"SessionCode:{request.SessionCode}", result.Data.Token, TimeSpan.FromSeconds(result.Data.Expires));
-                _cacheService.StringSet<bool>($"token:{result.Data.Token}", true, TimeSpan.FromSeconds(result.Data.Expires));
-                Console.WriteLine($"获取token成功，局部会话code:{request.SessionCode},{Environment.NewLine}token:{result.Data.Token}");
+                string token = result.Data.Token;
+                double tokenExpires = result.Data.Expires;
+                string key = $"SessionCode:{request.SessionCode}";
+                string tokenKey = $"token:{token}";
+                _cacheService.StringSet<string>(key, token, TimeSpan.FromSeconds(tokenExpires));
+                _cacheService.StringSet<bool>(tokenKey, true, TimeSpan.FromSeconds(tokenExpires));
+                Console.WriteLine($"获取token成功，局部会话code:{request.SessionCode},{Environment.NewLine}token:{token}");
             }
             return result;
         }
@@ -74,12 +77,14 @@ namespace Web1.Controllers
         [HttpPost]
         public ServerResponse LogOut([FromBody] LogoutRequest request)
         {
+            string key = $"SessionCode:{request.SessionCode}";
             //根据会话取出token
-            string token = _cacheService.StringGet<string>($"SessionCode:{request.SessionCode}");
+            string token = _cacheService.StringGet<string>(key);
             if (!string.IsNullOrEmpty(token))
             {
                 //清除token
-                _cacheService.DeleteKey($"token:{token}");
+                string tokenKey = $"token:{token}";
+                _cacheService.DeleteKey(tokenKey);
             }
             Console.WriteLine($"会话Code:{request.SessionCode}退出登录");
             return new ServerResponse().SetSuccess();

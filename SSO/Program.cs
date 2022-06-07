@@ -9,8 +9,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddHttpClient();
 builder.Services.AddMemoryCache();
-builder.Services.AddSingleton<IJWTService, JWTHSService>(); //对称加密
-//builder.Services.AddSingleton<IJWTService, JWTRSService>(); //非对称加密
+//builder.Services.AddSingleton<IJWTService, JWTHSService>(); //对称加密
+builder.Services.AddSingleton<IJWTService, JWTRSService>(); //非对称加密
 builder.Services.AddSingleton<ICacheService, MemoryCacheService>();
 builder.Services.Configure<AppSettingsOptions>(builder.Configuration.GetSection("AppSettings"));
 

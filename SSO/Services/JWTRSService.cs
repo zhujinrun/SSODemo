@@ -33,7 +33,8 @@ namespace SSO.Services
 
             var rsa = RSA.Create();
 
-            // rsa.ImportPkcs8PrivateKey 是一个扩展方法，来源于 RSAExtensions 包
+            // rsa.ImportPkcs8PrivateKey 和 rsa.ImportXmlPrivateKey 均是来源于 RSAExtensions 包的扩展方法
+
             //byte[] privateKey = Convert.FromBase64String(appRSSetting.PrivateKey);//这里只需要私钥，不要begin,不要end
             //rsa.ImportPkcs8PrivateKey(privateKey, out _);
 
